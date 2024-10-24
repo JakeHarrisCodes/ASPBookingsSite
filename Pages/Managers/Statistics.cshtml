@@ -1,0 +1,60 @@
+﻿@page
+@model PSA_JH_YR_AB.Pages.Managers.StatisticsModel
+@{
+    ViewData["Title"] = "Statistics";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+
+<h2>Traveller distribution with respect to postcodes</h2>
+@if (Model.TravellerStatistics.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-3">Postcode</th>
+                <th>Number of Travellers</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var stat in Model.TravellerStatistics)
+            {
+                <tr>
+                    <td>@stat.Postcode</td>
+                    <td>@stat.NumberOfTravellers</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No data available for traveller distribution.</p>
+}
+
+<h2>Booking distribution with respect to apartments</h2>
+@if (Model.BookingStatistics.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-3">Apartment ID</th>
+                <th>Number of Bookings</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var stat in Model.BookingStatistics)
+            {
+                <tr>
+                    <td>@stat.ApartmentID</td>
+                    <td>@stat.NumberOfBookings</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No data available for booking distribution.</p>
+}

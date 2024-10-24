@@ -1,0 +1,43 @@
+﻿@page
+@model PSA_JH_YR_AB.Pages.Travellers.MyBookingsModel
+
+@{
+    ViewData["Title"] = "My Bookings";
+}
+
+<h2>@ViewData["Title"]</h2>
+<span class="badge rounded-pill bg-primary">@ViewData["TotalBookingsCount"] bookings</span>
+<hr />
+
+@if (Model.Bookings.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Traveller Surname</th>
+                <th>Traveller Given Name</th>
+                <th>Apartment ID</th>
+                <th><a asp-page="MyBookings" asp-route-sortorder="@ViewData["NextCheckinOrder"]">Check In Date</a></th>
+                <th>Check Out Date</th>
+                <th><a asp-page="MyBookings" asp-route-sortorder="@ViewData["NextCostOrder"]">Cost</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model.Bookings)
+            {
+                <tr>
+                    <td>@booking.TheTraveller.Surname</td>
+                    <td>@booking.TheTraveller.GivenName</td>
+                    <td>@booking.ApartmentID</td>
+                    <td>@booking.CheckIn.ToString("yyyy-MM-dd")</td>
+                    <td>@booking.CheckOut.ToString("yyyy-MM-dd")</td>
+                    <td>@booking.Cost.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>You have no bookings made.<br /><br />Create your first booking <a asp-area="" asp-page="/Bookings/BookApartment">here</a></p>
+}

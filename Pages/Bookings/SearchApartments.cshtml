@@ -1,0 +1,83 @@
+﻿@page
+@model PSA_JH_YR_AB.Pages.Bookings.SearchApartmentsModel
+
+@{
+    ViewData["Title"] = "Search Apartments";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="SearchModel.NumberOfBedrooms" class="control-label"></label>
+                <select asp-for="SearchModel.NumberOfBedrooms" class="form-select form-control">
+                    <option value="1">1 Bedroom</option>
+                    <option value="2">2 Bedrooms</option>
+                    <option value="3">3 Bedrooms</option>
+                </select>
+                <span asp-validation-for="SearchModel.NumberOfBedrooms" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SearchModel.CheckIn" class="control-label"></label>
+                <input asp-for="SearchModel.CheckIn" type="date" class="form-control" />
+                <span asp-validation-for="SearchModel.CheckIn" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SearchModel.CheckOut" class="control-label"></label>
+                <input asp-for="SearchModel.CheckOut" type="date" class="form-control" />
+                <span asp-validation-for="SearchModel.CheckOut" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Search</button>
+        </form>
+    </div>
+</div>
+
+@if (ViewData["ActiveSearch"] == "true")
+{
+    <div class="col-md-8 mt-3">
+        <h3 class="mb-0">Search Results</h3>
+        <code>Click the Apartment ID to book!</code>
+
+        @if (Model.Result != null && Model.Result.Any())
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Apartment ID</th>
+                        <th>Level</th>
+                        <th>Bedroom Count</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var apartment in Model.Result)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-page="/Bookings/BookApartment"
+                                   asp-route-apartmentId="@apartment.ID"
+                                   asp-route-checkIn="@Model.SearchModel.CheckIn?.Date.ToString("yyyy-MM-dd")"
+                                   asp-route-checkOut="@Model.SearchModel.CheckOut?.Date.ToString("yyyy-MM-dd")">
+                                    @apartment.ID
+                                </a>
+                            </td>
+                            <td>@apartment.Level</td>
+                            <td>@apartment.BedroomCount</td>
+                            <td>$@apartment.Price</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p><br />No available apartments found. <br /><br />Perhaps try searching for a different date or bedroom count.</p>
+        }
+    </div>
+}

@@ -1,0 +1,101 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Welcome";
+}
+
+<div id="psaCarousel" class="carousel slide w-100 h-100" data-bs-ride="carousel" data-bs-interval="3000">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#psaCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#psaCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#psaCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#psaCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        <button type="button" data-bs-target="#psaCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/images/Apartment1.png" class="d-block w-100 h-100" alt="Apartment 1">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Premium Apartments at PSA</h5>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/images/Apartment2.png" class="d-block w-100 h-100" alt="Apartment 2">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Many Locations</h5>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/images/Apartment3.png" class="d-block w-100 h-100" alt="Apartment 3">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Affordable Prices</h5>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/images/Apartment4.png" class="d-block w-100 h-100" alt="Apartment 4">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Close to Train Stations</h5>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/images/Interior2.png" class="d-block w-100 h-100" alt="Interior 2">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Comfy Inside</h5>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#psaCarousel" data-bs-slide="prev" style="margin-left:150px">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#psaCarousel" data-bs-slide="next" style="margin-right:150px">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<br />
+
+<div class="row">
+    <div class="col-sm-7">
+        <figure>
+            <blockquote class="blockquote">
+                <h2>Welcome to PSA JH YR AB!</h2>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+                <cite title="Our Apartments">Book your best adventure yet in our comfy apartments</cite>
+            </figcaption>
+        </figure>
+    </div>
+    <div class="col-sm-5">
+        <h2 class="text-center">Useful Links</h2>
+        <ul>
+            <li><a asp-area="" asp-page="/Index">Home</a></li>
+            <li><a asp-area="" asp-page="/Privacy">Privacy</a></li>
+            @if (User.IsInRole("managers"))
+            {
+                <li>
+                    <a asp-area="" asp-page="/Bookings/Index">Manage Bookings</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-page="/Managers/Statistics">Statistics</a>
+                </li>
+            }
+            @if (User.IsInRole("travellers"))
+            {
+                <li>
+                    <a asp-area="" asp-page="/Travellers/MyDetails">My Details</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-page="/Bookings/SearchApartments">Search Apartments</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-page="/Bookings/BookApartment">Book an Apartment</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-page="/Travellers/MyBookings">My Bookings</a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

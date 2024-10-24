@@ -1,0 +1,74 @@
+﻿@page
+@model PSA_JH_YR_AB.Pages.Bookings.IndexModel
+
+@{
+    ViewData["Title"] = "Manage Bookings";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Apartment @Html.DisplayNameFor(model => model.Booking[0].TheRoom.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].TheTraveller.Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].TheTraveller.GivenName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].CheckIn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].CheckOut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].Cost)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Booking)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TheRoom.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TheTraveller.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TheTraveller.GivenName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckIn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckOut)
+                </td>
+                <td>
+                    $@Html.DisplayFor(modelItem => item.Cost)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (TempData["SuccessMsg"] != null)
+{
+    @section AnnouncementBanner {
+        @TempData["SuccessMsg"]
+    }
+}

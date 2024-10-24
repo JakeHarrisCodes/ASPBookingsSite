@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\PSA_JH_YR_AB.props" />
+</Project>
